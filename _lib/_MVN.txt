@@ -1,0 +1,12 @@
+//Uxmal
+mvn install:install-file -Dfile={Path/to/your/uxmal-core-0.9.2.jar} -DpomFile=<path-to-pomfile>
+mvn install:install-file -Dfile=C:\uxmal-core-0.9.2.jar -DpomFile=C:\uxmal-core-pom.xml
+
+//Oracle JDBC
+mvn install:install-file -Dfile={Path/to/your/ojdbc.jar} -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+mvn install:install-file -Dfile=C:\ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+
+
+//Simplecaptcha
+mvn install:install-file -Dfile={Path/to/your/simplecaptcha-1.2.1.jar} -DgroupId=nl.captcha -DartifactId=simplecaptcha -Dversion=1.2.1 -Dpackaging=jar
+mvn install:install-file -Dfile=C:/simplecaptcha-1.2.1.jar -DgroupId=nl.captcha -DartifactId=simplecaptcha -Dversion=1.2.1 -Dpackaging=jar

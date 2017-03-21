@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===========================================================================
+ log4j2.xml
+ log4j 2.x configuration file
+ 
+ @date    
+ @version 1.0
+===========================================================================
+-->
+
+<Configuration status="WARN">
+    
+    <Properties>
+	    <!-- Parameters -->
+        <Property name="logPath">./app-logs/</Property>
+		<!--<Property name="logPath">\\app-logs/</Property> WINDOWS -->
+		<!--<Property name="logPath">/app-logs/</Property>  LINUX   -->
+		
+		<Property name="historicalLogsPath">${logPath}historical/</Property>
+		<Property name="logExt">.log</Property>
+		
+		<!-- Log file names -->
+		<Property name="fileName_system">_system-log</Property>
+		<Property name="fileName_error">_error-log</Property>
+		<Property name="fileName_debug">_debug-log</Property>
+		<Property name="fileName_user">user-log</Property>
+		<Property name="fileName_database">db-log</Property>
+		<Property name="fileName_alert">alert-log</Property>
+		<Property name="fileName_mail">mail-log</Property>
+		<Property name="fileName_sms">sms-log</Property>
+    </Properties>
+	
+    <Appenders>
+        <Console name="CONSOLE_LOG" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n"/>
+        </Console>
+		
+		<!-- System -->
+        <RollingFile name="SYSTEM_LOG" fileName="${logPath}${fileName_system}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_system}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>       
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- Error -->
+		<RollingFile name="ERROR_LOG" fileName="${logPath}${fileName_error}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_error}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- Debug -->
+		<RollingFile name="DEBUG_LOG" fileName="${logPath}${fileName_debug}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_debug}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- User -->
+		<RollingFile name="USER_LOG" fileName="${logPath}${fileName_user}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_user}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- Database -->
+		<RollingFile name="DB_LOG" fileName="${logPath}${fileName_database}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_database}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- Alert -->
+		<RollingFile name="ALERT_LOG" fileName="${logPath}${fileName_alert}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_alert}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- Mail -->
+		<RollingFile name="MAIL_LOG" fileName="${logPath}${fileName_mail}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_mail}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+		<!-- SMS -->
+		<RollingFile name="SMS_LOG" fileName="${logPath}${fileName_sms}${logExt}"
+                     filePattern="${historicalLogsPath}${fileName_sms}.%d{yyyy-MM-dd}${logExt}">
+            <PatternLayout>
+                <pattern>[%-5level] %d{[yyyy/MM/dd]-[HH:mm:ss.SSS]} [%t] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+		
+    </Appenders>
+	
+    <Loggers>
+        <Logger name="SYSTEM_LOGGER" level="all" additivity="true">
+            <appender-ref ref="SYSTEM_LOG" level="info"/>
+        </Logger>
+		<Logger name="ERROR_LOGGER" level="all" additivity="false">
+            <appender-ref ref="ERROR_LOG" level="error"/>
+        </Logger>
+		<Logger name="DEBUG_LOGGER" level="all" additivity="false">
+            <appender-ref ref="DEBUG_LOG" level="debug"/>
+        </Logger>
+		
+		<Logger name="USER_LOGGER" level="all" additivity="false">
+            <appender-ref ref="USER_LOG" level="info"/>
+        </Logger>
+		<Logger name="DB_LOGGER" level="all" additivity="false">
+            <appender-ref ref="DB_LOG" level="debug"/>
+        </Logger>
+		<Logger name="ALERT_LOGGER" level="all" additivity="false">
+            <appender-ref ref="ALERT_LOG" level="info"/>
+        </Logger>
+		<Logger name="MAIL_LOGGER" level="all" additivity="false">
+            <appender-ref ref="MAIL_LOG" level="info"/>
+        </Logger>
+		<Logger name="SMS_LOGGER" level="all" additivity="false">
+            <appender-ref ref="SMS_LOG" level="info"/>
+        </Logger>
+		
+        <Root level="all">
+            <AppenderRef ref="CONSOLE_LOG"/>
+        </Root>
+    </Loggers>
+</Configuration>
